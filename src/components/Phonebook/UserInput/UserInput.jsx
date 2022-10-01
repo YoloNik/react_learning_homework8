@@ -4,7 +4,7 @@ import RegBtn from 'components/common/RegBtn/RegBtn';
 import PropTypes from 'prop-types';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 
-function UserInput({ onChange, addContact, valueName, valueTel }) {
+function UserInput({ onChange, addContact, valueName, valueTel, titel }) {
   return (
     <form className={s.formWrapper}>
       <input
@@ -31,7 +31,7 @@ function UserInput({ onChange, addContact, valueName, valueTel }) {
       />
       {valueName && valueTel ? (
         <RegBtn handleClick={addContact} className="addContact" type="submit">
-          <AiOutlineUserAdd /> Add contact
+          <AiOutlineUserAdd /> {titel}
         </RegBtn>
       ) : (
         <p>Add contact details to add it to the contact list</p>

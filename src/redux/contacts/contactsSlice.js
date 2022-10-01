@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getContacts, postContact, deleteContact } from './contactsOperation';
+import {
+  getContacts,
+  postContact,
+  deleteContact,
+  patchContact,
+} from './contactsOperation';
 
 const initialState = {
   contacts: {
@@ -54,6 +59,20 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.rejected, state => {
         state.contacts.data.loading = false;
       })
+      //PATCH CONTACTS
+      //.addCase(deleteContact.pending, state => {
+      //  state.contacts.data.loading = true;
+      //})
+      //.addCase(deleteContact.fulfilled, (state, action) => {
+      //  const idx = state.contacts.data.items.findIndex(
+      //    contact => contact.id === action.payload.id,
+      //  );
+      //  state.contacts.data.items.splice(idx, 1);
+      //  state.contacts.data.loading = false;
+      //})
+      //.addCase(deleteContact.rejected, state => {
+      //  state.contacts.data.loading = false;
+      //})
       .addDefaultCase(() => {});
   },
 });
