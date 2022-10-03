@@ -36,6 +36,7 @@ function LogIn(props) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+            style={{ border: '1px solid #c17900' }}
             type="email"
             placeholder="Enter email"
             value={email}
@@ -49,6 +50,7 @@ function LogIn(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            style={{ border: '1px solid #c17900' }}
             type="password"
             placeholder="Password"
             value={password}
@@ -56,10 +58,12 @@ function LogIn(props) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-        <Button variant="primary" type="button" onClick={onLogInBtn}>
+        <Button
+          style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+          variant="primary"
+          type="button"
+          onClick={onLogInBtn}
+        >
           LogIn
         </Button>
       </Form>

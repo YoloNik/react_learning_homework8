@@ -1,19 +1,27 @@
 .phonebook {
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 10px 20px;
 	width: 75vw;
-	background-color: #c4b9b6;
-	border: 1px solid #012e4a;
+	background-color: #e7eceb;
+	border-radius: 16px;
+	border: 1px solid #223f4a;
 	text-align: start;
 }
 
 .title {
 	text-align: center;
-	color: #282a31;
 }
 .contactsTitle {
 	margin-top: 10px;
 	display: flex;
 	gap: 10px;
 	align-items: center;
+}
+
+.listWraper {
+	margin-top: 10px;
+	border-radius: 16px;
+	padding: 10px;
+	border: 1px solid #223f4a;
+	background-color: #fff;
 }

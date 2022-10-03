@@ -8,20 +8,17 @@ import {
   getContacts,
   postContact,
   deleteContact,
-  patchContact,
 } from 'redux/contacts/contactsOperation';
-import s from './Phonebook.module.scss';
+import styles from './Phonebook.module.scss';
 import * as contactsSelector from 'redux/contacts/contactsSelector';
-import ReactLoading from 'react-loading';
 import * as authSelector from 'redux/auth/authSelector';
-import UpdateModal from 'components/common/Modal/Modal';
-import Button from 'react-bootstrap/Button';
+import { Radio } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
+//import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const Phonebook = () => {
   const [user, setUser] = useState('');
   const [phone, setPhone] = useState('');
-  const [currentContactId, setCurrentContactId] = useState('');
-  const [modalShow, setModalShow] = React.useState(false);
   const filter = useSelector(contactsSelector.getFilter);
   const contacts = useSelector(contactsSelector.getContacts);
   const loading = useSelector(contactsSelector.getLoading);
@@ -29,8 +26,8 @@ const Phonebook = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
+    if (userOnline) dispatch(getContacts());
+  }, [dispatch, userOnline]);
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -56,13 +53,14 @@ const Phonebook = () => {
     };
     const searchSameName = contacts.map(cont => cont.name).includes(user);
     searchSameName
-      ? alert(`${user} is already in contacts`)
+      ? toast(`Person: "${user}" is already in contacts`)
       : dispatch(postContact(newContact));
     reset();
   };
 
   const removeContact = e => {
     dispatch(deleteContact(e.target.name));
+    dispatch(getContacts());
   };
 
   const reset = () => {
@@ -75,37 +73,31 @@ const Phonebook = () => {
       el.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
     );
   };
-  const updateContact = e => {
-    setCurrentContactId(e.target.name);
-    setModalShow(true);
-  };
 
   return (
-    <>
-      <>
-        <UpdateModal
-          name={user}
-          phone={phone}
-          id={currentContactId}
-          onChange={handleChange}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      </>
-      <div className={s.phonebook}>
-        <h2 className={s.title}>Phonebook</h2>
-        <UserInput
-          titel={'Add contact'}
-          valueName={user}
-          valueTel={phone}
-          onChange={handleChange}
-          addContact={addContact}
-        />
-        <div className={s.contactsTitle}>
+    <div className={styles.phonebook}>
+      <h2 className={styles.title}>Phonebook</h2>
+      <UserInput
+        titel={'Add contact'}
+        valueName={user}
+        valueTel={phone}
+        onChange={handleChange}
+        addContact={addContact}
+      />
+      <div className={styles.listWraper}>
+        <div className={styles.contactsTitle}>
           {loading ? (
             <>
-              <p>We are processing your request, please wait</p>
-              <ReactLoading type="spin" width={30} height={30} />
+              <p>We are processing your request, please wait...</p>
+              <Radio
+                colors={['#223f4a', '#f0bb29', '#c17900']}
+                visible={true}
+                height="30"
+                width="30"
+                ariaLabel="radio-loading"
+                wrapperStyle={{ width: '20%' }}
+                wrapperClass="radio-wrapper"
+              />
             </>
           ) : (
             <p>Сontacts:</p>
@@ -117,11 +109,10 @@ const Phonebook = () => {
           filter={filter}
           contacts={contacts}
           filterByName={filterByName}
-          updateContact={updateContact}
           removeContact={removeContact}
         />
       </div>
-    </>
+    </div>
   );
 };
 

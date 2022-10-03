@@ -1,7 +1,14 @@
-.navList {
-	margin: 0 auto;
-	width: 75vw;
-	a {
-		color: #c4b9b6;
+.navItem {
+	//width: 100%;
+	//height: 100%;
+	//border-radius: 6px;
+	background-color: #e7eceb;
+
+	.selected,
+	.link {
+		display: inline-block;
+		width: 100%;
+		color: #f7c815;
+		text-decoration: none;
 	}
 }

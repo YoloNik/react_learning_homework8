@@ -20,7 +20,7 @@ const getCurrentUser = createAsyncThunk(
   async (_, thunkApi) => {
     const persistedToken = thunkApi.getState().auth.userData.token;
     token.set(persistedToken);
-    if (!persistedToken) return console.log('Unauthorized');
+    if (!persistedToken) return;
     try {
       const { data } = await axios.get(`${MAIN_URL}/users/current`);
       return data;

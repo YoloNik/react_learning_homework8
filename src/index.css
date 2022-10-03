@@ -13,8 +13,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	
+	height: 100vh;
+	background-color: #b6d1df;
+	color: #223f4a;
+}
 
-background-color: var(--bgColor);
+#root{
+	width: 80vw;
+	margin: 0 auto;
+	border: 1px solid #c17900;
+	border-radius: 30%;
 }
 
 code {

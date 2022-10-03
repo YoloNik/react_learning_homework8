@@ -39,7 +39,10 @@ const contactsSlice = createSlice({
         state.contacts.data.loading = true;
       })
       .addCase(postContact.fulfilled, (state, action) => {
-        state.contacts.data.items.push(action.payload);
+        state.contacts.data.items = [
+          action.payload,
+          ...state.contacts.data.items,
+        ];
         state.contacts.data.loading = false;
       })
       .addCase(postContact.rejected, state => {
@@ -49,30 +52,26 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.pending, state => {
         state.contacts.data.loading = true;
       })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        const idx = state.contacts.data.items.findIndex(
-          contact => contact.id === action.payload.id,
-        );
-        state.contacts.data.items.splice(idx, 1);
+      .addCase(deleteContact.fulfilled, state => {
         state.contacts.data.loading = false;
       })
       .addCase(deleteContact.rejected, state => {
         state.contacts.data.loading = false;
       })
       //PATCH CONTACTS
-      //.addCase(deleteContact.pending, state => {
-      //  state.contacts.data.loading = true;
-      //})
-      //.addCase(deleteContact.fulfilled, (state, action) => {
-      //  const idx = state.contacts.data.items.findIndex(
-      //    contact => contact.id === action.payload.id,
-      //  );
-      //  state.contacts.data.items.splice(idx, 1);
-      //  state.contacts.data.loading = false;
-      //})
-      //.addCase(deleteContact.rejected, state => {
-      //  state.contacts.data.loading = false;
-      //})
+      .addCase(patchContact.pending, state => {
+        state.contacts.data.loading = true;
+      })
+      .addCase(patchContact.fulfilled, (state, action) => {
+        const idx = state.contacts.data.items.findIndex(
+          contact => contact.id === action.payload.id,
+        );
+        state.contacts.data.items.splice(idx, 1, action.payload);
+        state.contacts.data.loading = false;
+      })
+      .addCase(patchContact.rejected, state => {
+        state.contacts.data.loading = false;
+      })
       .addDefaultCase(() => {});
   },
 });

@@ -1,61 +1,149 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import {
-  BrowserRouter,
-  Route,
-  NavLink,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import React, { useEffect, lazy, Suspense } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Contacts from 'pages/Contacts/Contacts';
-import Home from 'pages/Home/Home';
-import LogIn from 'pages/LogIn/LogIn';
-import Signup from 'pages/SignUp/Signup';
 import * as authSelector from 'redux/auth/authSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../redux/auth/authOperation';
+import { ColorRing } from 'react-loader-spinner';
 
-function Main(props) {
+const Contacts = lazy(() => import('pages/Contacts/Contacts'));
+const Home = lazy(() => import('pages/Home/Home'));
+const LogIn = lazy(() => import('pages/LogIn/LogIn'));
+const Signup = lazy(() => import('pages/SignUp/Signup'));
+
+function Main() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(authSelector.isUserLogin);
 
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
-  console.log('isLoggedIn ', isLoggedIn);
+
+  const wrapperStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    height: '80%',
+  };
 
   return (
     <Switch>
       <Route exact path="/" render={() => <Redirect to="/register" />} />
-
-      {/*auth*/}
       <Route
         path="/home"
-        render={() => (isLoggedIn ? <Home /> : <Redirect to="/login" />)}
+        render={() =>
+          isLoggedIn ? (
+            <Suspense
+              fallback={
+                <ColorRing
+                  visible={true}
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={wrapperStyle}
+                  colors={[
+                    '#c17900',
+                    '#f0bb29',
+                    '#e7eceb',
+                    '#b6d1df',
+                    '#223f4a',
+                  ]}
+                />
+              }
+            >
+              <Home />
+            </Suspense>
+          ) : (
+            <Redirect to="/login" />
+          )
+        }
       />
 
-      {/*no auth*/}
       <Route
         path="/login"
-        render={() => (!isLoggedIn ? <LogIn /> : <Redirect to="/contacts" />)}
+        render={() =>
+          !isLoggedIn ? (
+            <Suspense
+              fallback={
+                <ColorRing
+                  visible={true}
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={wrapperStyle}
+                  colors={[
+                    '#c17900',
+                    '#f0bb29',
+                    '#e7eceb',
+                    '#b6d1df',
+                    '#223f4a',
+                  ]}
+                />
+              }
+            >
+              <LogIn />
+            </Suspense>
+          ) : (
+            <Redirect to="/contacts" />
+          )
+        }
       />
 
-      {/*no auth*/}
       <Route
         path="/register"
-        render={() => (!isLoggedIn ? <Signup /> : <Redirect to="/contacts" />)}
+        render={() =>
+          !isLoggedIn ? (
+            <Suspense
+              fallback={
+                <ColorRing
+                  visible={true}
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={wrapperStyle}
+                  colors={[
+                    '#c17900',
+                    '#f0bb29',
+                    '#e7eceb',
+                    '#b6d1df',
+                    '#223f4a',
+                  ]}
+                />
+              }
+            >
+              <Signup />
+            </Suspense>
+          ) : (
+            <Redirect to="/contacts" />
+          )
+        }
       />
 
-      {/*auth*/}
       <Route
         path="/contacts"
-        render={() => (isLoggedIn ? <Contacts /> : <Redirect to="/login" />)}
+        render={() =>
+          isLoggedIn ? (
+            <Suspense
+              fallback={
+                <ColorRing
+                  visible={true}
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={wrapperStyle}
+                  colors={[
+                    '#c17900',
+                    '#f0bb29',
+                    '#e7eceb',
+                    '#b6d1df',
+                    '#223f4a',
+                  ]}
+                />
+              }
+            >
+              <Contacts />
+            </Suspense>
+          ) : (
+            <Redirect to="/login" />
+          )
+        }
       />
     </Switch>
   );
 }
-
-Main.propTypes = {};
 
 export default Main;

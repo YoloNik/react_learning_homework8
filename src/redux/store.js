@@ -23,8 +23,8 @@ const persistAuthConfig = getPersistConfig({
 });
 
 const rootReduser = combineReducers({
-  phonebook: contactsSlice,
   auth: persistReducer(persistAuthConfig, authSlice),
+  phonebook: contactsSlice,
 });
 
 const store = configureStore({

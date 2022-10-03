@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './UserInput.module.css';
+import s from './UserInput.module.scss';
 import RegBtn from 'components/common/RegBtn/RegBtn';
 import PropTypes from 'prop-types';
 import { AiOutlineUserAdd } from 'react-icons/ai';

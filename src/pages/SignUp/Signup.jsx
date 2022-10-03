@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signupNewUser } from 'redux/auth/authOperation';
+import styles from './styles.module.scss';
 
-function Signup(props) {
+function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPasswodr] = useState('');
@@ -34,12 +34,13 @@ function Signup(props) {
   };
 
   return (
-    <>
+    <div className={styles.wraper}>
       <h2>SignUp</h2>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
+            style={{ border: '1px solid #c17900' }}
             type="name"
             placeholder="Enter your name"
             onChange={userData}
@@ -50,6 +51,7 @@ function Signup(props) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+            style={{ border: '1px solid #c17900' }}
             type="email"
             placeholder="Enter email"
             onChange={userData}
@@ -63,6 +65,7 @@ function Signup(props) {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            style={{ border: '1px solid #c17900' }}
             type="password"
             placeholder="Password"
             onChange={userData}
@@ -70,18 +73,17 @@ function Signup(props) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-
-        <Button variant="primary" type="button" onClick={onSignUpBtn}>
+        <Button
+          style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+          variant="primary"
+          type="button"
+          onClick={onSignUpBtn}
+        >
           Submit
         </Button>
       </Form>
-    </>
+    </div>
   );
 }
-
-Signup.propTypes = {};
 
 export default Signup;

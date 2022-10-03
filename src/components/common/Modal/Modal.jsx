@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import * as authSelector from 'redux/auth/authSelector';
-import * as contactsSelector from 'redux/contacts/contactsSelector';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch, useSelector } from 'react-redux';
-import UserInput from 'components/Phonebook/UserInput/UserInput';
+import Form from 'react-bootstrap/Form';
+import * as contactsSelector from 'redux/contacts/contactsSelector';
 import { patchContact } from 'redux/contacts/contactsOperation';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function UpdateModal(props) {
   const [newUser, setNewUser] = useState('');
   const [newPhone, setNewPhone] = useState('');
-  //const user = useSelector(authSelector.userName);
   const contact = useSelector(contactsSelector.getContacts);
-  //const id = useSelector();
   const dispatch = useDispatch();
-  //console.log(props);
 
   const handleChange = e => {
-    switch (e.target.name) {
-      case 'name':
+    switch (e.target.id) {
+      case 'formBasicName':
         setNewUser(e.target.value);
         break;
-      case 'phone':
+      case 'formBasicPhone':
         setNewPhone(e.target.value);
         break;
       default:
@@ -37,12 +33,16 @@ function UpdateModal(props) {
       name: newUser,
       number: newPhone,
     };
-    //console.log(user);
 
-    const searchSameName = contact.map(cont => cont.name).includes(user);
-    searchSameName
-      ? alert(`${user} is already in contacts`)
-      : dispatch(patchContact(props.id, user));
+    const userParams = { userId: props.id, newContsct: user };
+
+    const searchSameName = contact.map(cont => cont.name).includes(user.name);
+    if (searchSameName) {
+      toast(`Person: "${user.name}" is already in contacts`);
+    } else {
+      dispatch(patchContact(userParams));
+      props.onHide();
+    }
   };
   return (
     <div>
@@ -58,26 +58,56 @@ function UpdateModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            {props.name} : {props.phone}. {props.id}
-          </p>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicName">
+              <Form.Label>
+                <h5>Name :{props.name}</h5>
+              </Form.Label>
+              <br></br>
+              <Form.Label>New name :{newUser}</Form.Label>
+              <Form.Control
+                type="name"
+                placeholder="Enter name"
+                onChange={handleChange}
+                value={newUser}
+              />
+            </Form.Group>
 
-          <UserInput
-            titel={'Update contact'}
-            valueName={newUser}
-            valueTel={newPhone}
-            onChange={handleChange}
-            addContact={updateContact}
-          />
+            <Form.Group className="mb-3" controlId="formBasicPhone">
+              <Form.Label>
+                <h5>Number: {props.phone}</h5>
+              </Form.Label>
+              <br></br>
+              <Form.Label>New number :{newPhone}</Form.Label>
+              <Form.Control
+                type="phone"
+                placeholder="Enter phone"
+                onChange={handleChange}
+                value={newPhone}
+              />
+            </Form.Group>
+
+            <Button
+              style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+              variant="primary"
+              type="button"
+              onClick={updateContact}
+            >
+              Submit
+            </Button>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button
+            style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+            onClick={props.onHide}
+          >
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
   );
 }
-
-Modal.propTypes = {};
 
 export default UpdateModal;

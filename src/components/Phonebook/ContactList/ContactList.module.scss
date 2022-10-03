@@ -1,0 +1,30 @@
+.contactList {
+	padding: 0;
+}
+.contactItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 10px 0;
+	background-color: #e7eceb;
+	border-radius: 16px;
+	border: 1px solid #223f4a;
+	padding: 5px 0 5px 10px;
+}
+.button {
+	margin: 2px;
+	padding: 3px;
+	background-color: #c17900;
+	border-radius: 16px;
+	border: 1px solid #223f4a;
+}
+.buttonUpdate {
+	padding: 3px;
+	margin: 2px;
+	border-radius: 16px;
+	border: 1px solid #223f4a;
+	background-color: #b6d1df;
+}
+.user {
+	margin: 0;
+}

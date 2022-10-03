@@ -1,79 +1,50 @@
-import React from 'react';
-import s from './ContactList.module.css';
+import { useState } from 'react';
+import styles from './ContactList.module.scss';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 import { RiContactsLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import UpdateModal from 'components/common/Modal/Modal';
 
-import { useDispatch, useSelector } from 'react-redux';
+ContactList.prototype = {
+  filter: PropTypes.string,
+  filterByName: PropTypes.string,
+  contacts: PropTypes.array.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};
 
-function ContactList({
-  filter,
-  contacts,
-  filterByName,
-  removeContact,
-  updateContact,
-}) {
-  //const [modalShow, setModalShow] = React.useState(false);
-  //const updateContact = () => {
-  //  setModalShow(true);
-  //};
+function ContactList({ filter, contacts, filterByName, removeContact }) {
+  const [modalShow, setModalShow] = useState(false);
+  const [idforModal, setIdforModal] = useState('');
+
+  const openModal = e => {
+    setIdforModal(e.target.name);
+    setModalShow(true);
+  };
+
   return (
-    <div className={s.test}>
-      <ul className={s.contactList}>
+    <div className={styles.test}>
+      <ul className={styles.contactList}>
         {(filter &&
           filterByName().map(el => {
             return (
-              <li className={s.contactItem} key={el.id}>
-                <p>
-                  {el.name}: {el.number}
-                </p>
-                <button
-                  name={el.id}
-                  onClick={updateContact}
-                  className={s.button}
-                  type="button"
-                >
-                  <RiContactsLine /> Update
-                </button>
-                <button
-                  name={el.id}
-                  onClick={removeContact}
-                  className={s.button}
-                  type="button"
-                >
-                  <AiOutlineUserDelete /> Delete
-                </button>
-              </li>
-            );
-          })) ||
-          contacts.map(el => {
-            return (
-              <>
-                {/*<UpdateModal
-                  name={el.name}
-                  phone={el.number}
-                  id={el.id}
-                  //onChange={handleChange}
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />*/}
-                <li className={s.contactItem} key={el.id}>
+              <li className={styles.contactItem} key={el.id}>
+                {el.id === idforModal && (
                   <UpdateModal
                     name={el.name}
                     phone={el.number}
-                    id={el.id}
-                    //onChange={handleChange}
-                    //show={modalShow}
-                    //onHide={() => setModalShow(false)}
+                    id={idforModal}
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
                   />
-                  <p>
-                    {el.name}: {el.number}
-                  </p>
+                )}
+                <p className={styles.user}>
+                  {el.name}: {el.number}
+                </p>
+                <div>
                   <button
                     name={el.id}
-                    onClick={updateContact}
-                    className={s.buttonUpdate}
+                    onClick={openModal}
+                    className={styles.buttonUpdate}
                     type="button"
                   >
                     <RiContactsLine /> Update
@@ -81,13 +52,51 @@ function ContactList({
                   <button
                     name={el.id}
                     onClick={removeContact}
-                    className={s.button}
+                    className={styles.button}
                     type="button"
                   >
                     <AiOutlineUserDelete /> Delete
                   </button>
-                </li>
-              </>
+                </div>
+              </li>
+            );
+          })) ||
+          contacts.map(el => {
+            return (
+              <li className={styles.contactItem} key={el.id}>
+                <div>
+                  {el.id === idforModal && (
+                    <UpdateModal
+                      name={el.name}
+                      phone={el.number}
+                      id={idforModal}
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
+                  )}
+                  <p className={styles.user}>
+                    {el.name}: {el.number}
+                  </p>
+                </div>
+                <div>
+                  <button
+                    name={el.id}
+                    onClick={openModal}
+                    className={styles.buttonUpdate}
+                    type="button"
+                  >
+                    <RiContactsLine /> Update
+                  </button>
+                  <button
+                    name={el.id}
+                    onClick={removeContact}
+                    className={styles.button}
+                    type="button"
+                  >
+                    <AiOutlineUserDelete /> Delete
+                  </button>
+                </div>
+              </li>
             );
           })}
       </ul>
@@ -96,10 +105,3 @@ function ContactList({
 }
 
 export default ContactList;
-
-ContactList.prototype = {
-  filter: PropTypes.string,
-  contacts: PropTypes.array.isRequired,
-  filterByName: PropTypes.string,
-  deleteContact: PropTypes.func.isRequired,
-};

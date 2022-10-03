@@ -17,10 +17,15 @@ function Home() {
   };
   return (
     <>
-      <Button type="button" onClick={onUserInfoBtn}>
+      <Button
+        style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+        type="button"
+        onClick={onUserInfoBtn}
+      >
         Get user info
       </Button>
       <br></br>
+      <hr></hr>
       <p>user: {name}</p>
       <p>email: {email}</p>
     </>
