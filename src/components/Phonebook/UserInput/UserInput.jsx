@@ -34,7 +34,9 @@ function UserInput({ onChange, addContact, valueName, valueTel, titel }) {
           <AiOutlineUserAdd /> {titel}
         </RegBtn>
       ) : (
-        <p>Add contact details to add it to the contact list</p>
+        <p style={{ margin: 0 }}>
+          Add contact details to add it to the contact list
+        </p>
       )}
     </form>
   );

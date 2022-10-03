@@ -15,7 +15,6 @@ const initialState = {
     },
   },
   loading: false,
-  error: null,
 };
 
 const authSlice = createSlice({
@@ -26,53 +25,47 @@ const authSlice = createSlice({
     builder
       .addCase(getCurrentUser.pending, state => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(getCurrentUser.fulfilled, (state, action) => {
-        if (!action.payload) return;
-        state.userData.user = action.payload;
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        if (!payload) return;
+        state.userData.user = payload;
         state.loading = false;
       })
-      .addCase(getCurrentUser.rejected, (state, action) => {
+      .addCase(getCurrentUser.rejected, state => {
         state.loading = false;
-        state.error = action.payload;
       })
       .addCase(signupNewUser.pending, state => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(signupNewUser.fulfilled, (state, action) => {
-        state.userData.token = action.payload.token;
-        state.userData.user = action.payload.user;
+      .addCase(signupNewUser.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        if (!payload.token) return;
+        state.userData.token = payload.token;
+        state.userData.user = payload.user;
         state.loading = false;
       })
-      .addCase(signupNewUser.rejected, (state, action) => {
+      .addCase(signupNewUser.rejected, state => {
         state.loading = false;
-        state.error = action.payload;
       })
       .addCase(LogInUser.pending, state => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(LogInUser.fulfilled, (state, action) => {
-        state.userData.token = action.payload.token;
-        state.userData.user = action.payload.user;
+      .addCase(LogInUser.fulfilled, (state, { payload }) => {
+        state.userData.token = payload.token;
+        state.userData.user = payload.user;
         state.loading = false;
       })
-      .addCase(LogInUser.rejected, (state, action) => {
+      .addCase(LogInUser.rejected, state => {
         state.loading = false;
-        state.error = action.payload;
       })
       .addCase(LogOutUser.pending, state => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(LogOutUser.fulfilled, (state, action) => {
+      .addCase(LogOutUser.fulfilled, state => {
         state.userData = initialState.userData;
       })
-      .addCase(LogOutUser.rejected, (state, action) => {
+      .addCase(LogOutUser.rejected, state => {
         state.loading = false;
-        state.error = action.payload;
       });
   },
 });

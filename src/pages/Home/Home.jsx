@@ -15,7 +15,7 @@ function Home() {
   return (
     <>
       <Button
-        style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+        style={{ backgroundColor: '#EE9B01', border: '2px solid #68904D' }}
         type="button"
         onClick={onUserInfoBtn}
       >
@@ -23,8 +23,8 @@ function Home() {
       </Button>
       <br></br>
       <hr></hr>
-      <p>user: {name}</p>
-      <p>email: {email}</p>
+      <p>User: {name}</p>
+      <p>Email: {email}</p>
     </>
   );
 }

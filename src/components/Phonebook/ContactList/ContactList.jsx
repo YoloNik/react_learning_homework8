@@ -40,7 +40,7 @@ function ContactList({ filter, contacts, filterByName, removeContact }) {
                 <p className={styles.user}>
                   {el.name}: {el.number}
                 </p>
-                <div>
+                <div className={styles.btn}>
                   <button
                     name={el.id}
                     onClick={openModal}
@@ -74,11 +74,10 @@ function ContactList({ filter, contacts, filterByName, removeContact }) {
                       onHide={() => setModalShow(false)}
                     />
                   )}
-                  <p className={styles.user}>
-                    {el.name}: {el.number}
-                  </p>
+                  <p className={styles.user}>Name: {el.name}</p>
+                  <p className={styles.user}>Number: {el.number}</p>
                 </div>
-                <div>
+                <div className={styles.btn}>
                   <button
                     name={el.id}
                     onClick={openModal}

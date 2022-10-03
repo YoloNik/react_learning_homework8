@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { BsSearch } from 'react-icons/bs';
 import styles from '../UserInput/UserInput.module.scss';
 
 //const style = {
@@ -18,10 +19,12 @@ import styles from '../UserInput/UserInput.module.scss';
 function FilterPhonebook({ filterValue, onChange }) {
   return (
     <>
-      <p>Find contacts by name</p>
+      <h3 style={{ textAlign: 'center' }}>
+        Find contacts by name <BsSearch />
+      </h3>
       <form>
         <input
-          className={styles.userInput}
+          className={styles.filter}
           placeholder="Search contact"
           type="text"
           name="filter"

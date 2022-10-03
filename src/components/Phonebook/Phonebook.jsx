@@ -76,7 +76,7 @@ const Phonebook = () => {
 
   return (
     <div className={styles.phonebook}>
-      <h2 className={styles.title}>Phonebook</h2>
+      <h1 className={styles.title}>Phonebook</h1>
       <UserInput
         titel={'Add contact'}
         valueName={user}
@@ -86,21 +86,23 @@ const Phonebook = () => {
       />
       <div className={styles.listWraper}>
         <div className={styles.contactsTitle}>
-          {loading ? (
+          {!loading ? (
             <>
-              <p>We are processing your request, please wait...</p>
-              <Radio
-                colors={['#223f4a', '#f0bb29', '#c17900']}
-                visible={true}
-                height="30"
-                width="30"
-                ariaLabel="radio-loading"
-                wrapperStyle={{ width: '20%' }}
-                wrapperClass="radio-wrapper"
-              />
+              <h2 className={styles.contactTitel}>
+                We are processing your request, please wait
+                <Radio
+                  colors={['#DA6A00', '#EE9B01', '#14471E']}
+                  visible={true}
+                  height="30"
+                  width="30"
+                  ariaLabel="radio-loading"
+                  wrapperStyle={{ width: '20%' }}
+                  wrapperClass="radio-wrapper"
+                />
+              </h2>
             </>
           ) : (
-            <p>Сontacts:</p>
+            <h2 className={styles.contactTitel}>Сontacts:</h2>
           )}
         </div>
 

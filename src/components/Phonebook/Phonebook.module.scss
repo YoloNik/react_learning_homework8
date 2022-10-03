@@ -2,9 +2,7 @@
 	margin: 0 auto;
 	padding: 10px 20px;
 	width: 75vw;
-	background-color: #e7eceb;
 	border-radius: 16px;
-	border: 1px solid #223f4a;
 	text-align: start;
 }
 
@@ -12,16 +10,17 @@
 	text-align: center;
 }
 .contactsTitle {
-	margin-top: 10px;
+	margin: 10px 0;
 	display: flex;
-	gap: 10px;
 	align-items: center;
+	justify-content: center;
 }
 
 .listWraper {
 	margin-top: 10px;
-	border-radius: 16px;
+	//border-radius: 10%;
 	padding: 10px;
-	border: 1px solid #223f4a;
 	background-color: #fff;
+	//border-left: 1px solid #14471e;
+	//border-right: 1px solid #14471e;
 }

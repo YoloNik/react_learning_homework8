@@ -34,7 +34,7 @@ function Signup() {
   };
 
   return (
-    <div className={styles.wraper}>
+    <>
       <h2>SignUp</h2>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicName">
@@ -74,7 +74,7 @@ function Signup() {
         </Form.Group>
 
         <Button
-          style={{ backgroundColor: '#f0bb29', borderColor: '#c17900' }}
+          style={{ backgroundColor: '#EE9B01', border: '1px solid #68904D' }}
           variant="primary"
           type="button"
           onClick={onSignUpBtn}
@@ -82,7 +82,7 @@ function Signup() {
           Submit
         </Button>
       </Form>
-    </div>
+    </>
   );
 }
 
