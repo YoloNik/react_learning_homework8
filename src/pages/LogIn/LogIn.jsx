@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
-import { LogInUser, LogOutUser } from '../../redux/auth/authOperation';
+import { LogInUser,  } from '../../redux/auth/authOperation';
 
-function LogIn(props) {
+function LogIn() {
   const [email, setEmail] = useState('');
   const [password, setPasswodr] = useState('');
   const dispatch = useDispatch();

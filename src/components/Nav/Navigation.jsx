@@ -1,15 +1,12 @@
 import { NavLink } from 'react-router-dom';
-
-import styles from './Nav.module.scss';
 import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 import * as authSelector from 'redux/auth/authSelector';
+import { LogOutUser } from 'redux/auth/authOperation';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiUserCircle } from 'react-icons/hi';
-import Button from 'react-bootstrap/Button';
-import { LogOutUser } from 'redux/auth/authOperation';
-import LogIn from 'pages/LogIn/LogIn';
-import Signup from 'pages/SignUp/Signup';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './Nav.module.scss';
+
 function Navigation() {
   const user = useSelector(authSelector.userName);
   const userOnline = useSelector(authSelector.isUserLogin);

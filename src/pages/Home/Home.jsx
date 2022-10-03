@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { HiUserCircle } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from 'redux/auth/authOperation';
 import { userEmail, userName } from 'redux/auth/authSelector';
 
 function Home() {
-  const dispatch = useDispatch();
   const name = useSelector(userName);
   const email = useSelector(userEmail);
-  const [showInfo, setShowInfo] = useState(false);
+  const dispatch = useDispatch();
 
   const onUserInfoBtn = () => {
     dispatch(getCurrentUser());
