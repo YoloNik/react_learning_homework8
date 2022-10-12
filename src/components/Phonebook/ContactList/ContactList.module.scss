@@ -10,23 +10,24 @@
 	border-bottom: 1px solid #223f4a;
 	padding: 5px 0 5px 10px;
 }
-.button {
+.buttonDelete,
+.buttonUpdate {
 	margin: 2px;
 	padding: 3px;
 	background-color: #da6a00;
+	color: #223f4a;
 	border-radius: 16px;
 	border: 1px solid #223f4a;
+	&:hover {
+		background-color: #ee9b01 !important;
+	}
 }
 .buttonUpdate {
-	padding: 3px;
-	margin: 2px;
-	border-radius: 16px;
-	border: 1px solid #ee9b01;
 	background-color: #b6d1df;
 }
+
 .user {
 	width: auto;
-	text-transform: capitalize;
 	margin: 0;
 }
 .btn {

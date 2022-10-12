@@ -37,7 +37,10 @@ const signupNewUser = createAsyncThunk('users/signup', async userData => {
     toast.success(`Hi ${data.user.name}. We glad to see you!`);
     return data;
   } catch (error) {
-    toast.error(error.response.statusText);
+    toast.error(
+      error.response.statusText +
+        '. This email address already exist or one of the field not completed',
+    );
   }
 });
 

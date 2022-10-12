@@ -19,12 +19,10 @@ body {
 
 #root{
 	position: relative;
-	width: 80vw;
+	width: 80%;
 	margin: 0 auto;	
-		border: 1px solid #DA6A00;
-			border-radius: 6px;
-
-
+	border: 1px solid #DA6A00;
+	border-radius: 6px;
 }
 
 

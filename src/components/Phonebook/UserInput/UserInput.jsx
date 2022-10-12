@@ -1,14 +1,14 @@
 import React from 'react';
-import s from './UserInput.module.scss';
-import RegBtn from 'components/common/RegBtn/RegBtn';
+import styles from './UserInput.module.scss';
 import PropTypes from 'prop-types';
 import { AiOutlineUserAdd } from 'react-icons/ai';
+import { Button } from 'react-bootstrap';
 
 function UserInput({ onChange, addContact, valueName, valueTel, titel }) {
   return (
-    <form className={s.formWrapper}>
+    <form className={styles.formWrapper}>
       <input
-        className={s.userInput}
+        className={styles.userInput}
         placeholder="Name"
         type="text"
         value={valueName}
@@ -19,7 +19,7 @@ function UserInput({ onChange, addContact, valueName, valueTel, titel }) {
         required
       />
       <input
-        className={s.userInput}
+        className={styles.userInput}
         onChange={onChange}
         placeholder="Phone"
         value={valueTel}
@@ -30,9 +30,13 @@ function UserInput({ onChange, addContact, valueName, valueTel, titel }) {
         required
       />
       {valueName && valueTel ? (
-        <RegBtn handleClick={addContact} className="addContact" type="submit">
+        <Button
+          onClick={addContact}
+          className={styles.addContact}
+          type="submit"
+        >
           <AiOutlineUserAdd /> {titel}
-        </RegBtn>
+        </Button>
       ) : (
         <p style={{ margin: 0 }}>
           Add contact details to add it to the contact list

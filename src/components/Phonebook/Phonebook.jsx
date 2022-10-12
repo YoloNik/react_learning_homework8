@@ -86,7 +86,7 @@ const Phonebook = () => {
       />
       <div className={styles.listWraper}>
         <div className={styles.contactsTitle}>
-          {!loading ? (
+          {loading ? (
             <>
               <h2 className={styles.contactTitel}>
                 We are processing your request, please wait

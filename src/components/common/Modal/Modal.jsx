@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import * as contactsSelector from 'redux/contacts/contactsSelector';
+//import * as contactsSelector from 'redux/contacts/contactsSelector';
 import { patchContact } from 'redux/contacts/contactsOperation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 function UpdateModal(props) {
-  const [newUser, setNewUser] = useState('');
-  const [newPhone, setNewPhone] = useState('');
-  const contact = useSelector(contactsSelector.getContacts);
+  const [newUser, setNewUser] = useState(props.name);
+  const [newPhone, setNewPhone] = useState(props.phone);
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -33,15 +32,13 @@ function UpdateModal(props) {
       name: newUser,
       number: newPhone,
     };
+    if (user.name && user.number) {
+      const userParams = { userId: props.id, newContsct: user };
 
-    const userParams = { userId: props.id, newContsct: user };
-
-    const searchSameName = contact.map(cont => cont.name).includes(user.name);
-    if (searchSameName) {
-      toast(`Person: "${user.name}" is already in contacts`);
-    } else {
       dispatch(patchContact(userParams));
       props.onHide();
+    } else {
+      toast.error('You need to fill in all fields');
     }
   };
   return (
@@ -64,7 +61,7 @@ function UpdateModal(props) {
                 <h5>Name :{props.name}</h5>
               </Form.Label>
               <br></br>
-              <Form.Label>New name :{newUser}</Form.Label>
+              {/*<Form.Label>New name :{newUser}</Form.Label>*/}
               <Form.Control
                 type="name"
                 placeholder="Enter name"
@@ -78,7 +75,7 @@ function UpdateModal(props) {
                 <h5>Number: {props.phone}</h5>
               </Form.Label>
               <br></br>
-              <Form.Label>New number :{newPhone}</Form.Label>
+              {/*<Form.Label>New number :{newPhone}</Form.Label>*/}
               <Form.Control
                 type="phone"
                 placeholder="Enter phone"
@@ -93,7 +90,7 @@ function UpdateModal(props) {
               type="button"
               onClick={updateContact}
             >
-              Submit
+              Update contact
             </Button>
           </Form>
         </Modal.Body>

@@ -1,0 +1,14 @@
+.webcam {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.webcamConteiner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		video {
+			border-radius: 6px;
+		}
+	}
+}

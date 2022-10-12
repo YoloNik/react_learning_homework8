@@ -4,6 +4,8 @@ import { AiOutlineUserDelete } from 'react-icons/ai';
 import { RiContactsLine } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 import UpdateModal from 'components/common/Modal/Modal';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ContactList.prototype = {
   filter: PropTypes.string,
@@ -14,7 +16,7 @@ ContactList.prototype = {
 
 function ContactList({ filter, contacts, filterByName, removeContact }) {
   const [modalShow, setModalShow] = useState(false);
-  const [idforModal, setIdforModal] = useState('');
+  const [idforModal, setIdforModal] = useState(null);
 
   const openModal = e => {
     setIdforModal(e.target.name);
@@ -41,22 +43,22 @@ function ContactList({ filter, contacts, filterByName, removeContact }) {
                   {el.name}: {el.number}
                 </p>
                 <div className={styles.btn}>
-                  <button
+                  <Button
                     name={el.id}
                     onClick={openModal}
                     className={styles.buttonUpdate}
                     type="button"
                   >
                     <RiContactsLine /> Update
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     name={el.id}
                     onClick={removeContact}
-                    className={styles.button}
+                    className={styles.buttonDelete}
                     type="button"
                   >
                     <AiOutlineUserDelete /> Delete
-                  </button>
+                  </Button>
                 </div>
               </li>
             );
@@ -78,22 +80,20 @@ function ContactList({ filter, contacts, filterByName, removeContact }) {
                   <p className={styles.user}>Number: {el.number}</p>
                 </div>
                 <div className={styles.btn}>
-                  <button
+                  <Button
                     name={el.id}
                     onClick={openModal}
                     className={styles.buttonUpdate}
-                    type="button"
                   >
                     <RiContactsLine /> Update
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     name={el.id}
                     onClick={removeContact}
-                    className={styles.button}
-                    type="button"
+                    className={styles.buttonDelete}
                   >
                     <AiOutlineUserDelete /> Delete
-                  </button>
+                  </Button>
                 </div>
               </li>
             );

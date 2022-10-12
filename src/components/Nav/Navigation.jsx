@@ -1,15 +1,15 @@
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import { useEffect, useCallback, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogOutUser } from 'redux/auth/authOperation';
 import { NavLink, useLocation } from 'react-router-dom';
 import * as authSelector from 'redux/auth/authSelector';
 import { HiUserCircle } from 'react-icons/hi';
+import { GrLogout } from 'react-icons/gr';
 import styles from './Nav.module.scss';
 
 function Navigation() {
-  const user = useSelector(authSelector.userName);
   const userOnline = useSelector(authSelector.isUserLogin);
   const dispatch = useDispatch();
   const location = useLocation().pathname;
@@ -21,10 +21,14 @@ function Navigation() {
   return (
     <>
       {userOnline ? (
-        <Nav fill variant="tabs" defaultActiveKey="/home">
+        <Nav
+          fill
+          className={styles.navContainer}
+          variant="tabs"
+          defaultActiveKey="/home"
+        >
           <Nav.Item className={styles.navItem}>
             <Nav.Link
-              id={styles.test}
               eventKey="/home"
               as="div"
               active={location === '/home' ? true : false}
@@ -34,7 +38,7 @@ function Navigation() {
                 className={styles.link}
                 activeClassName={styles.selected}
               >
-                <HiUserCircle /> {user}
+                <HiUserCircle /> profile
               </NavLink>
             </Nav.Link>
           </Nav.Item>
@@ -56,12 +60,16 @@ function Navigation() {
           </Nav.Item>
 
           <Button
-            style={{ backgroundColor: '#EE9B01', border: 'none' }}
+            style={{
+              backgroundColor: '#EE9B01',
+              border: 'none',
+              width: '15%',
+            }}
             variant="primary"
             type="button"
             onClick={onLogOut}
           >
-            LogOut
+            <GrLogout />
           </Button>
         </Nav>
       ) : (

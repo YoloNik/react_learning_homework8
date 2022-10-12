@@ -1,27 +1,17 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentUser } from 'redux/auth/authOperation';
+
+import { useSelector } from 'react-redux';
+
 import { userEmail, userName } from 'redux/auth/authSelector';
+import WebcamUser from 'components/common/Webcam/Webcam';
 
 function Home() {
   const name = useSelector(userName);
   const email = useSelector(userEmail);
-  const dispatch = useDispatch();
 
-  const onUserInfoBtn = () => {
-    dispatch(getCurrentUser());
-  };
   return (
     <>
-      <Button
-        style={{ backgroundColor: '#EE9B01', border: '2px solid #68904D' }}
-        type="button"
-        onClick={onUserInfoBtn}
-      >
-        Get user info
-      </Button>
-      <br></br>
+      <WebcamUser />
       <hr></hr>
       <p>User: {name}</p>
       <p>Email: {email}</p>
