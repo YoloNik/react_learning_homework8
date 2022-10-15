@@ -8,8 +8,7 @@
 }
 .userInput,
 .filter {
-	//display: inline-block;
-	margin: 0 auto 20px auto;
+	margin: 0 auto;
 	padding-left: 20px;
 	width: 80%;
 	height: 30px;
@@ -25,8 +24,12 @@
 	width: 100%;
 }
 .addContact {
+	padding: 10px 40px;
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	border: none;
+	border-radius: 16px;
 	margin: 0 auto;
 	background-color: #3b865d;
 }

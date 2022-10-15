@@ -1,32 +1,25 @@
-@import-normalize;
-/*bring in normalize.css styles*/
-
-*,*::after, *,::before{
-	box-sizing: border-box;
-}
-
-
 body {
-	margin: 0;
-  font-family: 'Roboto',
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	
-	height: 100vh;
-	color: #223f4a;
 }
-
-#root{
-	position: relative;
-	width: 80%;
-	margin: 0 auto;	
-	border: 1px solid #DA6A00;
-	border-radius: 6px;
-}
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+#root{
+	border: 1px solid #ee9b01;
+	border-radius: 16px;
+	overflow: hidden;
+	width: 80vw;
+	margin: 3vw auto;
+}
+.error{
+	color: red;
+	opacity: 0.8;
 }
