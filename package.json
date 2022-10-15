@@ -1,5 +1,5 @@
 {
-  "name": "react_learning_homework8_tsx",
+  "name": "react_learning_homework8",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -39,6 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+		"lint:js": "eslint src/**/*.{js,jsx}",
     "predeploy": "npm run build",
     "deploy": "netlify deploy -p"
   },
